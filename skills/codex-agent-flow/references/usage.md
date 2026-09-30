@@ -32,7 +32,7 @@ python3 "${CODEX_HOME:-$HOME/.codex}/skills/codex-agent-flow/scripts/usage.py" \
   usage.py 不保证适用于所有 Codex 版本。
 - `tool_calls_with_matching_turn` 是可关联的外层工具调用数，exec 内的多条命令不展开；
   response_span_seconds 是响应时间跨度，不能代替端到端任务耗时。
-- 不输出“调研成本占比”等伪精确归因，也不套用上游 Claude 的价格或 TTL 权重。
+- 不输出“调研成本占比”等伪精确归因；不使用未经验证的价格或缓存权重推算订阅费用。
 
 根报告的 `by_thread[<worker UUID>]` 是 worker 自身用量；对 worker UUID 单独运行统计器
 仍会纳入它记录到的后代，不能自动视为该 worker 独占用量。模型/effort 的实际分布见
