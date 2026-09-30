@@ -18,5 +18,4 @@
 命令和配置依客户端/版本核对：[命令说明](https://learn.chatgpt.com/docs/developer-commands)、
 [配置参考](https://learn.chatgpt.com/docs/config-file/config-reference)。
 [Prompt caching](https://developers.openai.com/api/docs/guides/prompt-caching) 要求匹配的
-prefix；API token rate limit 和价格不能推断 ChatGPT 订阅额度。历史观察见
-[background.md](background.md)，不把旧样本当作当前窗口读数。
+prefix；API token rate limit 和价格不能推断 ChatGPT 订阅额度。

@@ -15,21 +15,21 @@
 
 | 阶段 | 初始选项 | 理由 |
 |---|---|---|
-| 不确定的领域调研、架构、复杂实现 | GPT-6 Astra，当前有效推理档位 | 需要处理歧义与广泛推理 |
+| 不确定的领域调研、架构、复杂实现 | 当前可用的强推理模型 | 需要处理歧义与广泛推理 |
 | 格式、构建、单测、Clippy | 本地确定性工具 | 这些检查不需要模型 |
-| 摘要测试日志；将明确的清单项映射到测试证据 | GPT-6 Luna，low，且任务范围足够窄时 | 重复、边界清楚 |
-| 失败原因不明；SCSI/LTFS 安全和协议判断；最终风险决定 | GPT-6 Astra | 低成本摘要不能代替正确性判断 |
+| 摘要测试日志；将明确的清单项映射到测试证据 | 当前可用的高效模型，low effort，且任务范围足够窄时 | 重复、边界清楚 |
+| 失败原因不明；协议/安全判断；最终风险决定 | 当前可用的强推理模型 | 低成本摘要不能代替正确性判断 |
 
-上表是 2026-09-30 的实验起点，不是固定路由或性能结论；模型可用性与
+上表是路由原则，不是固定模型分配或性能结论；模型可用性与
 使用额度依 Codex 产品和版本而变，应检查本机模型列表。参见[模型选择指南](https://developers.openai.com/api/docs/guides/model-selection)
 和 [Codex 模型控制](https://learn.chatgpt.com/docs/developer-commands)。API 的按 token
 价格不能推断 ChatGPT 订阅额度；使用本地记录字段或账号提供的额度指标。不能因为用了
-Luna 就断言更省。
+使用高效模型就断言更省。
 
 单独运行一次 Codex CLI 的例子：
 
 ```bash
-codex exec -C /absolute/path/to/repo -m gpt-6-luna \
+codex exec -C /absolute/path/to/repo -m '<efficient-model>' \
   -c 'model_reasoning_effort="low"' --sandbox read-only --json \
   -o /tmp/check-summary.txt - < /tmp/check-summary-prompt.txt \
   > /tmp/check-summary-events.jsonl
@@ -37,11 +37,10 @@ codex exec -C /absolute/path/to/repo -m gpt-6-luna \
 
 简报应保持精简，注明 base/head commit、已经执行的检查、相关 diff 路径、受限日志片段、
 核对标准和该模型不能判断的范围。核对者只报告哪些标准有证据、哪些仍不确定；不能把退出码、
-缺失日志、被忽略的测试或模拟验证结果升级成通过。由项目维护者或较强模型判断证据是否
-满足原始验收。对 tape-rs，摘要模型不能替代 Holo 实验室或真实硬件验证，也不能从孤立的
-日志片段推断 T10 协议语义。
+缺失日志、被忽略的测试或模拟验证结果升级成通过。由项目维护者或强推理 worker 判断证据是否
+满足原始验收；协议和设备结论须依据完整证据，不能从孤立日志推断语义。
 
-把分阶段路由设为单独实验：A 组全程 Astra；B 组由 Astra 调研和实现，Luna 只做有限定的
+把分阶段路由设为单独实验：A 组全程使用同一强推理模型；B 组由该模型调研和实现，高效模型只做有限定的
 日志摘要或清单核对。固定模型版本、推理档位、检查、证据材料、工具和阈值。按阶段记录
 所有可用的 input/output/cache/reasoning 字段、两边会话调用、总响应数、耗时、返工和验收
 结果。低模型可能降低 token 单价，但增加重试或漏项。只有验收相同且每个通过任务的实际

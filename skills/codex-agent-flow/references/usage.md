@@ -16,7 +16,7 @@ python3 "${CODEX_HOME:-$HOME/.codex}/skills/codex-agent-flow/scripts/usage.py" \
 ```
 
 可指定 `--sessions-dir`，默认 `$CODEX_HOME/sessions` 或 `~/.codex/sessions`。
-可指定 `--since 2026-09-30T10:00:00+08:00 --until 2026-09-30T11:00:00+08:00`，
+可指定 `--since 'START_TIMESTAMP' --until 'END_TIMESTAMP'`（ISO 8601），
 区间左闭右开，按响应记账时间选择，不按任务开始时间推算。多会话接力的任务需对每个
 独立根会话分别统计并合计；不要再次叠加已包含在根报告内的子代理。
 

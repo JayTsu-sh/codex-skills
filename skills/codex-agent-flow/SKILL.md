@@ -53,7 +53,6 @@ description: Apply a token-efficiency workflow when the user asks to use agent-f
 | 长任务、跨 worker 接续或异步任务 | [long-sessions.md](references/long-sessions.md)：等待、handoff |
 | 判断 CodeGraph 是否减少搜索成本 | [codegraph.md](references/codegraph.md)：适用条件与对照 |
 | 选择/实验分阶段模型或 effort | [model-routing.md](references/model-routing.md)：显式配置与阶段边界 |
-| 追溯来源或历史样本 | [background.md](references/background.md)：带日期的证据及限制 |
 
 测量口径：worker 自身 usage 反映上下文隔离，不等于端到端节省。根会话报告包含记录到的
 子代理，不能再累加子代理总量；按 [用量字段](references/usage.md) 核对实际模型/effort，
